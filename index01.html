@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Online Shop</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 42px;
+    margin: 0;
+    background: linear-gradient(90deg, #ff758c, #ff7eb3);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+header p {
+    color: #555;
+    font-size: 18px;
+}
+
+/* PRODUCTS */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.product-info h3 {
+    margin: 0;
+}
+
+.price {
+    color: #ff758c;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* FORM */
+form {
+    background: #fff3f6;
+    padding: 35px;
+    border-radius: 20px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color: #fff;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #777;
+}
+
+/* POPUP */
+.popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 35px;
+    border-radius: 20px;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <h1>ONLINE SHOP</h1>
+    <p>ร้านค้าออนไลน์สำหรับการเรียนรู้</p>
+</header>
+
+<section class="products">
+    <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt="เสื้อยืด">
+        <div class="product-info">
+            <h3>เสื้อยืด</h3>
+            <div class="price">250 บาท</div>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBdbtTxZoQaQSeo-oHBnZFsX0wrSYgjpevqA&s" alt="แก้วน้ำ">
+        <div class="product-info">
+            <h3>แก้วน้ำ</h3>
+            <div class="price">120 บาท</div>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxASEBIQEhMQFRAWEBcSEg8SFRcXEBAVFRIWFhUTFRMYHSggGBolHRUVITEhJSkrLi4vGB8zODMsNygtLisBCgoKDg0OGxAQGyslICYtLystLSsrLS0tLSstKy8tLy4tLS8tLS0tLS0tLS0tLy0vLS0tLS0tLS0tLS0tLS0tLf/AABEIAMIBAwMBEQACEQEDEQH/xAAcAAEAAgMBAQEAAAAAAAAAAAAABQYBAgcDBAj/xABJEAACAQICBgQICggEBwAAAAAAAQIDEQQhBQYSMUFRB2FxkRMUIjJSc4GhIyQzNEJykrKzwRZiscLR0uHwFXSC8RdDU2ODhJP/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQMEAgUG/8QAMBEBAAICAAQEBAUFAQEAAAAAAAECAxEEEyExEjJBcTNRgfAiYZHB0RRSobHhIwX/2gAMAwEAAhEDEQA/AO4gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbAh9K6x0KCzbnPhCHHtluSKb561WVx2srs9dcTJydOhHZitqT8qewvSk1ZJGf8Aqbz2hbyK+ss6P17cb+MQur3U6Stsx64t525ruJpxX90FsH9q3aO0lRrx2qU1Jcbb12rgaqXrbsotWa931nbkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAILTmmKUKjoSbyoOtNJ5u04xhTXW22+xFGTJET4Z+W1tKTMbVfQei3i60p1G1SjnJri35sE3/feZsePmW3PZde/gjULlTeGoQ2IRio8UvpfWfE3VrFY1DLNpmdyrmmcHhatOap0YQm15NSKsk+tLKz3e0qvgraOkalZXLaJ6qrourWws41abvaUoSineL2WlKL555dTRijxY521W1fpLqeiNIwxFKNWN1fJxe+LW9M9Gl4vG4Yr1ms6faduQDDYGQAAAAAAAAAAAAAAAAAAAAAAAAAAAc60ph3WxtbdtOrGknyW1sfuowXjxZJa6z4aQtPgKVCkqMLq3HjKT3yfWbaUisahmtabTuXx4HA+Elm21fedOU/h8FCCtZPtA59R0fLxuqobLhKrN7HKSlK1lztkefqfHMR82zceGNprBVXSe1H2rg11mjDPXSnKay6+UsLHyYOpNRUpq9oU77lKVnm+VuKN1MXijc9IY8mbwzqI3LleP1v0xpOt4KhKqk/Nw+EvCyvk51E725uUtnsJ8NYceK0vbT3RfpSFOlU+dzlF+FpxknKg1mkpVJfCLrVs1u4nMXjs6nHPdrgukDTOjqkaOKUpxUU1QxUNmooXaTjUSUnezV3tbhMVkibQ7JqjrRh9IUPDUW1JZVaMvPpS5PmnwfHvS4tXS2tosnDl0AAAAAAAAAAAAAAAAAAAAAAAAFBw0pR0lVk7bLxEYpcrVJ3fvRhj4s+7VPw/ol8StutZm5lT+DwyhGyA+gDn6lKGOXLxprfzqNbvaYY6ZPq1z1p9H047HRhDE1XbwdNTm7cVCN5W673NWOIm0zDNedVjbj+I0zi8bToYOKk5zqzqSpx3161SpJxb/VjFpK+SSb4Za4jXWWOZmekO26vaPpaNwtPDQSc7bVWol8rUa8qXZwXJJIpmdy0VrqNPeeMrVH5N0iHSl9LWr68T8dmnKdGUFFrfs1KsYuMk/OV5X/3Z3SeqvJHTai6CxdbBYxYnCSvRb2lC/k1aEnteDa5peT1Sj1F1aTaGeb+G236G0bpCnXgpweTSduNmrozTGmuJ2+sJAAAAAAAAAAAAAAAAAAAAAAAFB0i0sZUaayrXeXFWv7cjDf4kz+bXXyJqL+Me03MixoDIFC0/BQxM5JeUqimn3S/Mw5Ol2unWqM1spbGja8c/koX5vaqwcv2s28PXURDHnne3w9DmBgvGMVZNqlSp05cYqSlKduV7Q7i/L2hRgjrMrzOrKq7W4+4paE7g8OoxXMCrdLST0VWva3hKO/18CzF5lWbyOZ6uaGjUwFavTvtUa9pRbunTlCLuuVnd9jkaK2ittfNltSbUm3yX7VicqVGhK7zjf2OTaXc0Z8s7vLXhjVIXyjUUoqS4orWNwAAAAAAAAAAAAAAAAAAAAAAHMbynOUpZSlJzfK73/tPN6zLd2hZ3K9ZPsPShhWWG5dgGwFM1mwu1XnJb0o5f6UY80fiacc/hRXSDTcsBXtxpQllyU4Sf7Dbj7wyZe0ofojq2p4ynwUaLXs8JF/kXZo6QpwT1l0nQdNWuUNCXAqvSfR29FYlZ3Xg5Zb/ACa9Nv3JnePzQrzR+CXJ9VNJSpYXGYeO0qmIq4ahTvvTq+GjOXVaCb7i21esSopbpMOrYbAJ0vI+ikkupZIz721xGlg0VBqmkB9gAAAAAAAAAAAAAAAAAAAAPmx+OhRSlO9nLZVlfO1/yObXivWXVazbs+KWsFD9f7JxzquuVZQtue3dRd72T+jbrjfIw9dtfRPUMUrxk78L9xtjNXTJOO207T1hw9krzv8AVZPOocqzb9IsPzl9ljnUOVZWNNaUjLEOpT2pR2Unla9t+/P3GbJeJtuF9KarqUdrjj4rR1V/SdNU7Pg5TSXcnf2Gvh7ROo9WTiKzETKvdFddLEV4bnLDv2uM4/k2a83aGXB5p9nWNBPJoztSXAidbKHhMBiocXhqjXaoNx96R1SdWiXF43WYcU1Aw/hcfH0YQlWs9zcYuMXbmnUv3mjLP4ZZsMfih1zRdVp7JlbFipKyQG4AAAAAAAAAAAAAAAAAAAAILW35On639yRRxHaFuLurCl7O0ytDWU+Pv5AeqV80ENHGXUB5ypSfIhO3zunJcO4JV/Xh7WHgs1asr/8Azn3mzgfPPt+8MfG9KR7/ALS+Po3qJYpPi4Ti3xe425/JHux4PPPs6/oSpaTRQ1J0D4tNJ+LV7b/AVLduwyY7ot2cb1CqU1jKU42SnTnSa5NxbXvUTZmjdNww4LTF4iXTdEQvUMTesgAAAAAAAAAAAAAAAAAAAAAEHravgoetX3JFHEeWFuHuq7X9UZWgSAzEIbJgNpgVHTGsdeniKtOOxsxaSvG7XkJ779Z6WDhcd8cWnbzs3E5KZJrGkFpnSlbE09iWxZSUrxjZpq6unfrZfThaUnddqb8Te8atp8uha08PVVeLTmlZbSvk1Z5LeWzji3dXXJNZ3CzUte8bB3j4G/60Hb7xHIq6/qL/AJPofSdpHlhb+rl/ORyanPv+T58T0oaQlCUHHCtSi4v4OeSas2vhOsicNXXOv+Sp6Gxk6FWnVjZuMlNQa8luOaulY71voqidTuF4wnSDWgnONGk524ylZP6v9Tj+nj5rf6mfkv8AqFrBVxuHnVqqCnGs6doJpWUISTs28/KZTlpFZ1C7FebxuVlK1oAAAAAAAAAAAAAAAAAAAELrW/gYetX3ZFGfyrcXdV0ZV7AGrk9pJWtxv/fDK/aUZ8/KjetwPaUYrjtPlF2iv9Vs32GemXiM87pHgr85jcz9EsNxfBx9u0vanZ9x34eJp13F4+WvDP09P1Q5trL87r/Xj1/8uJ9JwdvFgrP+/d4/E/Ft9+iN2ny9v9DUoYhdO+9dfAD1nFNfkTKGroRfIaTuWk8LFr+pHhg8TwlhpLcznwy62wqk48huTpLo/Rjj6kaFZRdk6qduF9hZr3dxnz94aeH7S6ZobEynHyndlDQkQAAAAAAAAAAAAAAAAAAAhNbW1RhZX+FX3JFGfyrcXdVrmVoEEMyeXC/C4HzKVSXUu7jlm837LHO5lZqsPWjR2bu92/7td5s604mdqBrPH45W7Y/hQPa4T4Mffq8bivi2+/RGbBp0o21sBkD1pYapJXjCclzjFtd6RXbPipOrWiPeYh1FLT2iWjunZ3ut6e9FkTExuHOtMIDMoLeNG126O4rwFW3/AFv3EY8/eGvh+0uk6veayloTIAAAAAAAAAAAAAAAAAAAQutnyEfWr7sinP5VuLzKokZGh54qk5wcYy2W7Wlys0xHSU1nU7R2H0fTbcKlSU6y62nFcHFPhxvuLJ8URvXRoni7b1WIiPlqOvu+mNLErydum4+m03Ut2brnPRzNsM9dTv5b6fy+mMowSi23zk83d3d3y4kxSZ6s8zuVB1mbeLqvheG/f8lDgexwsaxRHv8A7ePxXxZ+/RGyZoZ2iCU3htI4SMU5YfamlkslC/Ft3vL2p2PGycFxtrTFc2qz77+ka6fSWrnYtda9XnW0zi5y21UnGP0YwezTSWdlzsu0up/87gsVfDNYmfWZ6z/xHjzXncdv0j/ryxGk5VYuNeKlNLyaySjVi1uTtlKPCz7SzFwUYbRbh51HrWZ3Wfb5T+f0cWyTbpf9fVHm9SSyEi89Hq+L1PXP7kTHn7w18P5Z93SNX/NZS0JgAAAAAAAAAAAAAAAAAAAIXW35BetX7JFOfyrcXmVRGNobRZKHw1tHxvdWttbXg5PyXLZ2bqW+Lt2rqLYyzrU/fqjTbR3hVdTcrJRS2ldt2zamt67bsnL4ek1I2+hzgnn53PN2OIre0dOzuuO1o3EOe60/PKzvdPYfV8lA9bhPhR9+rxuKj/1n79EZc0qG8IN7kc2yVrOplfi4XLmjeON/WP3l60vJu2lJW3JrLr2t8fYVWtGTUROvv5ev1aZ4TJgib2iLR66nevee8fQqV27vJZpu2+6yTvvudVxUpqJ/z/DNOXJk3NfedfvP3t5XLmcAxOQF56Pvm9Tl4Z/cgZM/mhs4byz7ulav+ayhelwAAAAAAAAAAAAAAAAAAAg9b38XXrY/skU5/Ktw+ZVooxtDKYHliKSmrX5q3BpllL+GduqW8M708qspQsnN2eSsr+9llfDefL/lGTPjrqZr3/N5wqwWTjNu7X0d/HJSvwebO58fpOv1/hXPHTM6jp11016fX8lI1llHxqo43s1Hfv8AMR6PD78HXu8visnMyTZGF7M2ImkTO5hdiy3r+GtpiJ79SLaeRNqxaNSnHa+K3ixzqfv0bOTZFcda9k5uKy5umS37f6HY76KejFiHLzmRKV76PPm1T17z/wDHAyZ/M18P5ZdL1fXkFK9LgAAAAAAAAAAAAAAAAAABA65O2Hj61fdkUcR5VuHzKpCorGRpY8KBq6gGG096T7VcmLTHZzNYnvDZbPox7kT47fOXPKp8o/RQdaWvG52SS2YZJWXmI9fg5mcUbeXxVYjJMQjDUztkSh9KwVRwU1Hai19HNpJ2zVjnxxvTXXh8vg8cRuP8sUMHObsk+uTyjHm2yZtEOMfD5ct9amPzn0fTVwELWp1YTn6GScvq5+45i8+rRfgscxrFeJn5dOvsj7Hbz2k4kTAvXR581qf5iX4dMyZ/M28P5XTNX/MKVyWAAAAAAAAAAAAAAAAAAACva7yth4euX3JlHEeVdg8ymRZjaWyuEN0iRkDIFB1ofxyp9WH3EexwXwoeRxfxZRrZrZhsbHpTxc0rKU0uSk0u5DULK5clY1W0xHu93idpJSqSeT2lKU2r2yytzHhhXfPntExMzMe//Wvkc1u4bW/2pkqd3+9fy85Su29+e98RC6bTadz3aSlYIXno+fxWfLxiX4dMx5vM24PK6bq/5hSuSoAAAAAAAAAAAAAAAAAAAQutOjKuIpwhT2bqptPadstmS5dZTmpN4iIW4rxWdyqFfRVWk9mWzfqkUci67nVaxw0+S70ORdHNq9PF5cl3jkXObU8XlyXeOTc5tTxaXL3jkXObVzXW5uONrJ8Nj8KDPU4aJrjiJ++rzOJmLZJlFusaNs+mPCMGmLsDKZIy5MIbKoxsaVGyJTDoHR034rU/zEvw6Zmzd2vB5XUdX/kylclQAAAAAAAAAAAAAAAAAAAAeNXDQl50U+1AeT0bR9CIGP8ADKPoIB/hdH0EBj/CqPoIDgXSRaOlsXGKtFSpJL/16V/e2acflhjyeaVfsWq20YEo23sSMJAGAsEMSZCV96OZ/F6q/wC+/fTh/AzZvM1YPLLqmrvyZSvSwAAAAAAAAAAAAAAAAAAAAAAAAAAU/TXR1gMTWq4mpGs61R7UnGo0m1FRVluWSR3F5iNQ4nHWZ3Ks1ujagm0oYm3C01/Anm2c8mrzXR5QXDE+2S/KJPOsjkUH0fUOWJ+0v5RzrHIq1/4f0OWJ+0v5RzrHIox+gOH5Yj7S/lHOscijb9BMN6Ff7T/gOdZPJoxLULDehX+2xzbHJoktE6BjhYyhShUSlLae1du9kt/sOLWm3d3WsV7Llq6moNNWOXSYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGLALALALAEgMgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//Z" alt="กระเป๋าผ้า">
+        <div class="product-info">
+            <h3>กระเป๋าผ้า</h3>
+            <div class="price">180 บาท</div>
+        </div>
+    </div>
+</section>
+
+<form id="orderForm">
+    <h2>สั่งซื้อสินค้า</h2>
+
+    <input type="text" id="name" placeholder="ชื่อผู้สั่ง" required>
+
+    <select id="product" required>
+        <option value="">เลือกสินค้า</option>
+        <option>เสื้อยืด</option>
+        <option>แก้วน้ำ</option>
+        <option>กระเป๋าผ้า</option>
+    </select>
+
+    <input type="number" id="quantity" placeholder="จำนวน" required>
+
+    <textarea id="address" placeholder="ที่อยู่จัดส่ง" required></textarea>
+
+    <button type="submit">ยืนยันการสั่งซื้อ</button>
+</form>
+
+<footer>
+© 2026 Online Shop | Student Project
+</footer>
+
+</div>
+
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h3>สั่งซื้อสำเร็จ 🎉</h3>
+        <p>บันทึกข้อมูลเรียบร้อยแล้ว</p>
+        <button onclick="closePopup()">ตกลง</button>
+    </div>
+</div>
+
+<script>
+const scriptURL =
+"https://script.google.com/macros/s/AKfycbyjs9-IWp1bHoflW-9ZZGJIhfrsl4pMZuXVuuaRNRLrWk_S4ACwlMpQ1mtEOHrx6YiRuQ/exec";
+
+document.getElementById("orderForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const data = {
+        name: document.getElementById("name").value,
+        product: document.getElementById("product").value,
+        quantity: document.getElementById("quantity").value,
+        address: document.getElementById("address").value
+    };
+
+    fetch(scriptURL,{
+        method:"POST",
+        body: JSON.stringify(data)
+    }).then(()=>{
+        document.getElementById("popup").style.display="flex";
+        document.getElementById("orderForm").reset();
+    });
+});
+
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
+</script>
+
+</body>
+</html>
